@@ -13,7 +13,7 @@ def ADR(DF,n=14):
     df["H-PC"]=abs(df["High"]-df["Close"].shift(1))
     df["L-PC"]=abs(df["Low"]-df["Close"].shift(1))
     df["TR"]=df[["H-L","H-PC","L-PC"]].max(axis=1,skipna=False)
-    df["ATR"]=df["TR"].ewm(span=n,min_periods=n).mean()
+    df["ATR"]=df["TR"].ewm(com=n,min_periods=n).mean()
     return df["ATR"]
 for f in ohlc_data:
    ohlc_data[f]["ATR"]= ADR(ohlc_data[f])
